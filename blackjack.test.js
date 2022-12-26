@@ -6,5 +6,6 @@ describe("getCardsFromDeck() function", () => {
         const shuffledDeck = shuffleDeck(deck);
         const card = getCardsFromDeck(shuffledDeck);
         expect(typeof card).toBe("object");
+        expect(deck.length).toBe(51);
     })
 })
