@@ -19,7 +19,7 @@ for (let j = 0; j < 4; j++) {
     for (let i = 0; i < 13; i++) {
         if (i === 0) {
             card = "Ace of " + suit;
-            cardValue = 11;
+            cardValue = 1;
         }
         else if (i === 10) {
             card = "Jack of " + suit;
@@ -40,6 +40,7 @@ for (let j = 0; j < 4; j++) {
 
         deck.push({name: card, value: cardValue})
     } 
+    console.table(deck)
 }
 
 exporting: module.exports = { deck };
