@@ -26,7 +26,8 @@ const { deck } = require('./deck')
 
 
 function shuffleDeck(deck) {
-    let shuffledDeck = deck.sort(function () {
+    const deckCopy = [...deck]
+    let shuffledDeck = deckCopy.sort(function () {
         return Math.random() - 0.5;
     });
     return shuffledDeck;
