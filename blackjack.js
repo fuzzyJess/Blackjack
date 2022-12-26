@@ -15,30 +15,52 @@
 
 //  ** extension ** need to allow multiple players
 
-// try this by trying to write using Classes - each player would be an 
-// instance of a player and would have their own hand variable and score 
-// variable
+// players array hold player objects - each player would have their own 
+// hand variable and score variable
 
 // - each player would have a 'hand' array to hold their hand
 // - each player would have a score array to hold their score
 
 const { deck } = require('./deck')
+// array of 52 cards in a deck
 
-class Player {
-    constructor(name) {
-        this.name = name;
-        this.score = 0;
-        this.hand = [];
-    }
+
+function shuffleDeck(deck) {
+    let shuffledDeck = deck.sort(function () {
+        return Math.random() - 0.5;
+    });
+    return shuffledDeck;
 }
+// method to shuffle the deck of cards - takes an array of cards and returns a copy 
+// of that array shuffled.
 
-function deal() {
+const players = [];
+// array to contain player objects 
 
+function getCardsFromDeck(deck) {
+    let card = deck.pop();
+    return card;
 }
+// returns a card from the end of a deck removing it from the deck
 
+function deal(player) {
+    const cardsDealt = [];
+    cardsDealt.push(getCardsFromDeck);
+    // add score from card dealt to player score
+
+    // how do I deal with if an ace allow player to chose the value?
+    // to fulfill scenarios just need to work out score so not bust... could 
+    // always start with aces as 1 and then change up to 11 if that helps 
+    // get total of 21?
+
+    cardsDealt.push(getCardsFromDeck);
+    return cardsDealt;
+}
+    
 function hit() {
+    cardsDealt.push(getCardsFromDeck);
 
 }
 
-exporting: module.exports = { deal };
+exporting: module.exports = { deal, shuffleDeck, getCardsFromDeck };
 
