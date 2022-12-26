@@ -5,10 +5,15 @@ const { deck } = require('./deck');
 describe("shuffleDeck() function", () => {
     test("returns a new array", () => {
         const returnDeck = shuffleDeck(deck);
-        console.table(deck);
-        console.table(returnDeck);
         expect(deck).not.toEqual(returnDeck);
     })
+    test('does not mutate the input array', () => {
+        const newDeck = [...deck];
+        // creates new deck array which is a copy of the original deck
+        shuffleDeck(newDeck);
+        expect(newDeck).toEqual(deck);
+        // the new deck array still matches the original deck array
+      });  
 })
 describe("getCardsFromDeck() function", () => {
     test("returns card removed from end of deck", () => {

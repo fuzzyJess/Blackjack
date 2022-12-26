@@ -40,7 +40,7 @@ for (let j = 0; j < 4; j++) {
 
         deck.push({name: card, value: cardValue})
     } 
-//    console.table(deck)
 }
+    console.log(deck)
 
 exporting: module.exports = { deck };
