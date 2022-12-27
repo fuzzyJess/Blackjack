@@ -36,14 +36,22 @@ describe("getCardsFromDeck() function", () => {
 describe("deal() function", () => {
     test("removes two cards from deck passed in", () => {
         const newDeck = shuffleDeck(deck);
-        const newPlayer = {hand: [], score: 0}
+        const newPlayer = {hand: [], score: 0, acesHeld: 0}
         deal(newPlayer, newDeck);
         expect(newDeck.length).toBe(50);
     })
     test("adds two cards to player.hand array", () => {
         const newDeck = shuffleDeck(deck);
-        const newPlayer = {hand: [], score: 0}
+        const newPlayer = {hand: [], score: 0, acesHeld: 0}
         deal(newPlayer, newDeck);
         expect(newPlayer.hand.length).toBe(2);
+    })
+    test("updates score increasing with value of cards dealt", () => {
+        const newDeck = shuffleDeck(deck);
+        const newPlayer = {hand: [], score: 0, acesHeld: 0}
+        deal(newPlayer, newDeck);
+        console.log(newPlayer.hand)
+        const valueOfCards = newPlayer.hand[0].value + newPlayer.hand[1].value;
+        expect(newPlayer.score).toBe(valueOfCards);
     })
 })

@@ -46,11 +46,15 @@ function getCardsFromDeck(deck) {
 
 function deal(player, deck) {
     
-    player.hand.push(getCardsFromDeck(deck));
-    player.hand.push(getCardsFromDeck(deck));
-    // add card returned from getCardsFromDeck function into player.hand array
-    //player.score()
-    // add score from card dealt to player score
+    for (let i = 0; i <= 1; i++) {
+        let card = getCardsFromDeck(deck);
+        player.score += card.value;
+        player.hand.push(card);
+    }
+    // loops through twice each time removing a card from the deck passed in
+    // then adding the score from card dealt to player.score
+    // then adding the card returned from getCardsFromDeck() into player.hand array
+    
 
     // how do I deal with if an ace allow player to chose the value?
     // to fulfill scenarios just need to work out score so not bust... could 
