@@ -40,4 +40,10 @@ describe("deal() function", () => {
         deal(newPlayer, newDeck);
         expect(newDeck.length).toBe(50);
     })
+    test("adds two cards to player.hand array", () => {
+        const newDeck = shuffleDeck(deck);
+        const newPlayer = {hand: [], score: 0}
+        deal(newPlayer, newDeck);
+        expect(newPlayer.hand.length).toBe(2);
+    })
 })
