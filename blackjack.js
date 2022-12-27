@@ -67,8 +67,8 @@ function deal(player, deck) {
 
     // how do I deal with if an ace allow player to chose the value?
     // to fulfill scenarios just need to work out score so not bust... could 
-    // always start with aces as 1 and then change up to 11 if that helps 
-    // get total of 21?
+    // always start with aces as 11 and then change down to 1 if that prevents busting?
+    
 }
     
 function hit(player, deck) {

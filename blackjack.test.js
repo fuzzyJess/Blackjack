@@ -106,6 +106,23 @@ describe("hit() function", () => {
         const newDeck = [{ name: 'King of Hearts', value: 10 }];
         const newPlayer = {hand: [{ name: '10 of Spades', value: 10 }, { name: '6 of Hearts', value: 6 }], score: 16, acesHeld: 0, validHand: true};
         hit(newPlayer, newDeck);
-        expect(newPlayer.validHand).toBe(false)
+        expect(newPlayer.score).toBe(26);
+        expect(newPlayer.validHand).toBe(false);
+    })
+    test("returns player object with properties updated correctly", () => {
+        const newDeck = [{ name: 'Seven of Clubs', value: 7 }];
+        const newPlayer1 = {hand: [{ name: 'Ace of Spades', value: 1 }, { name: '6 of Hearts', value: 6 }], score: 7, acesHeld: 1, validHand: true};
+        returnedPlayer = hit(newPlayer1, newDeck);
+        expect(returnedPlayer.hand.length).toBe(3);
+        expect(returnedPlayer.score).toBe(14);
+        expect(returnedPlayer.acesHeld).toBe(1);
+        expect(returnedPlayer.validHand).toBe(true);
+        const newDeck2 = [{ name: 'Seven of Clubs', value: 7 }];
+        const newPlayer2 = {hand: [{ name: '8 of Spades', value: 8 }, { name: '9 of Hearts', value: 9 }], score: 17, acesHeld: 0, validHand: true};
+        returnedPlayer = hit(newPlayer2, newDeck2);
+        expect(returnedPlayer.hand.length).toBe(3);
+        expect(returnedPlayer.score).toBe(24);
+        expect(returnedPlayer.acesHeld).toBe(0);
+        expect(returnedPlayer.validHand).toBe(false);
     })
 })
