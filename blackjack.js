@@ -71,10 +71,14 @@ function deal(player, deck) {
     // get total of 21?
 }
     
-function hit() {
-    cardsDealt.push(getCardsFromDeck);
-
+function hit(player, deck) {
+    let card = getCardsFromDeck(deck);
+        if (card.value === 1) {
+            player.acesHeld += 1;
+        }
+        player.score += card.value;
+        player.hand.push(card);
 }
 
-exporting: module.exports = { deal, shuffleDeck, getCardsFromDeck };
+exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit };
 
