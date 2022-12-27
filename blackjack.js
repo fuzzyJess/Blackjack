@@ -32,8 +32,8 @@ function shuffleDeck(deck) {
     });
     return shuffledDeck;
 }
-// method to shuffle the deck of cards - takes an array of cards and returns a copy 
-// of that array shuffled.
+// method to shuffle the deck of cards - takes an array of cards and returns a 
+// copy of that array shuffled.
 
 const players = [];
 // array to contain player objects 
@@ -44,9 +44,12 @@ function getCardsFromDeck(deck) {
 }
 // returns a card from the end of a deck removing it from the deck
 
-function deal(player) {
-    const cardsDealt = [];
-    cardsDealt.push(getCardsFromDeck);
+function deal(player, deck) {
+    
+    player.hand.push(getCardsFromDeck(deck));
+    player.hand.push(getCardsFromDeck(deck));
+    // add card returned from getCardsFromDeck function into player.hand array
+    //player.score()
     // add score from card dealt to player score
 
     // how do I deal with if an ace allow player to chose the value?
@@ -54,8 +57,7 @@ function deal(player) {
     // always start with aces as 1 and then change up to 11 if that helps 
     // get total of 21?
 
-    cardsDealt.push(getCardsFromDeck);
-    return cardsDealt;
+    
 }
     
 function hit() {

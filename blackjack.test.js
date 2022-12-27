@@ -1,4 +1,5 @@
-const { shuffleDeck, getCardsFromDeck, deal} = require('./blackjack');
+const { shuffleDeck, getCardsFromDeck, deal } = require('./blackjack');
+const { players } = require('./blackjack');
 const { deck } = require('./deck');
 
 
@@ -30,5 +31,13 @@ describe("getCardsFromDeck() function", () => {
         let newDeck = [...deck];
         getCardsFromDeck(newDeck);
         expect(newDeck.length).toBe(51);
+    })
+})
+describe("deal() function", () => {
+    test("removes two cards from deck passed in", () => {
+        const newDeck = shuffleDeck(deck);
+        const newPlayer = {hand: [], score: 0}
+        deal(newPlayer, newDeck);
+        expect(newDeck.length).toBe(50);
     })
 })
