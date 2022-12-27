@@ -77,7 +77,11 @@ function hit(player, deck) {
             player.acesHeld += 1;
         }
         player.score += card.value;
-        player.hand.push(card);
+        if (player.score > 21) {
+            player.validHand = false;
+        }
+    player.hand.push(card);
+    return player;
 }
 
 exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit };

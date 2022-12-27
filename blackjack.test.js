@@ -35,7 +35,7 @@ describe("getCardsFromDeck() function", () => {
 describe("deal() function", () => {
     test("removes two cards from deck passed in", () => {
         const newDeck = shuffleDeck(deck);
-        const newPlayer = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer, newDeck);
         expect(newDeck.length).toBe(50);
     })
@@ -47,7 +47,7 @@ describe("deal() function", () => {
     })
     test("updates score increasing with value of cards dealt", () => {
         const newDeck = shuffleDeck(deck);
-        const newPlayer = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer, newDeck);
         const valueOfCards = newPlayer.hand[0].value + newPlayer.hand[1].value;
         expect(newPlayer.score).toBe(valueOfCards);
@@ -57,14 +57,14 @@ describe("deal() function", () => {
             { name: 'Ace of Spades', value: 1 },
             { name: '2 of Spades', value: 2 }
         ];
-        const newPlayer1 = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer1 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer1, newDeck1);
         expect(newPlayer1.acesHeld).toBe(1);
         const newDeck2 = [
             { name: '2 of Spades', value: 2 },
             { name: '6 of Hearts', value: 6 }
         ]
-        const newPlayer2 = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer2 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer2, newDeck2);
         expect(newPlayer2.acesHeld).toBe(0);
     })
@@ -73,7 +73,7 @@ describe("deal() function", () => {
             { name: 'Ace of Spades', value: 1 },
             { name: '5 of Diamonds', value: 5 }
         ];
-        const newPlayer1 = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer1 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer1, newDeck1);
         expect(newPlayer1.hand.length).toBe(2);
         expect(newPlayer1.score).toBe(6);
@@ -82,7 +82,7 @@ describe("deal() function", () => {
             { name: '2 of Spades', value: 2 },
             { name: '6 of Hearts', value: 6 }
         ]
-        const newPlayer2 = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer2 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer2, newDeck2);
         expect(newPlayer2.hand.length).toBe(2);
         expect(newPlayer2.score).toBe(8);
@@ -92,14 +92,20 @@ describe("deal() function", () => {
 describe("hit() function", () => {
     test("removes one card from deck passed in", () => {
         const newDeck = shuffleDeck(deck);
-        const newPlayer = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer = {hand: [], score: 0, acesHeld: 0};
         hit(newPlayer, newDeck);
         expect(newDeck.length).toBe(51);
     })
     test("add new card to player.hand array", () => {
         const newDeck = shuffleDeck(deck);
-        const newPlayer = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer = {hand: [], score: 0, acesHeld: 0};
         hit(newPlayer, newDeck);
         expect(newPlayer.hand.length).toBe(1);
+    })
+    test("updates player.score checking if player hand is still valid", () => {
+        const newDeck = [{ name: 'King of Hearts', value: 10 }];
+        const newPlayer = {hand: [{ name: '10 of Spades', value: 10 }, { name: '6 of Hearts', value: 6 }], score: 16, acesHeld: 0, validHand: true};
+        hit(newPlayer, newDeck);
+        expect(newPlayer.validHand).toBe(false)
     })
 })
