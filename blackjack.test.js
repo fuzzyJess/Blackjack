@@ -96,4 +96,10 @@ describe("hit() function", () => {
         hit(newPlayer, newDeck);
         expect(newDeck.length).toBe(51);
     })
+    test("add new card to player.hand array", () => {
+        const newDeck = shuffleDeck(deck);
+        const newPlayer = {hand: [], score: 0, acesHeld: 0}
+        hit(newPlayer, newDeck);
+        expect(newPlayer.hand.length).toBe(1);
+    })
 })
