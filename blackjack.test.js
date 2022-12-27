@@ -50,8 +50,23 @@ describe("deal() function", () => {
         const newDeck = shuffleDeck(deck);
         const newPlayer = {hand: [], score: 0, acesHeld: 0}
         deal(newPlayer, newDeck);
-        console.log(newPlayer.hand)
         const valueOfCards = newPlayer.hand[0].value + newPlayer.hand[1].value;
         expect(newPlayer.score).toBe(valueOfCards);
+    })
+    test("updates acesHeld variable when aces added to hand", () => {
+        const newDeck1 = [
+            { name: 'Ace of Spades', value: 1 },
+            { name: '2 of Spades', value: 2 }
+        ];
+        const newDeck2 = [
+            { name: '2 of Spades', value: 2 },
+            { name: '6 of Hearts', value: 6 }
+        ]
+        const newPlayer1 = {hand: [], score: 0, acesHeld: 0}
+        const newPlayer2 = {hand: [], score: 0, acesHeld: 0}
+        deal(newPlayer1, newDeck1);
+        deal(newPlayer2, newDeck2);
+        expect(newPlayer1.acesHeld).toBe(1);
+        expect(newPlayer2.acesHeld).toBe(0);
     })
 })
