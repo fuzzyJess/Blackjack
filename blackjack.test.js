@@ -58,15 +58,36 @@ describe("deal() function", () => {
             { name: 'Ace of Spades', value: 1 },
             { name: '2 of Spades', value: 2 }
         ];
+        const newPlayer1 = {hand: [], score: 0, acesHeld: 0}
+        deal(newPlayer1, newDeck1);
+        expect(newPlayer1.acesHeld).toBe(1);
         const newDeck2 = [
             { name: '2 of Spades', value: 2 },
             { name: '6 of Hearts', value: 6 }
         ]
-        const newPlayer1 = {hand: [], score: 0, acesHeld: 0}
         const newPlayer2 = {hand: [], score: 0, acesHeld: 0}
-        deal(newPlayer1, newDeck1);
         deal(newPlayer2, newDeck2);
-        expect(newPlayer1.acesHeld).toBe(1);
         expect(newPlayer2.acesHeld).toBe(0);
+    })
+    test("returns player object with properties updated correctly", () => {
+        const newDeck1 = [
+            { name: 'Ace of Spades', value: 1 },
+            { name: '5 of Diamonds', value: 5 }
+        ];
+        const newPlayer1 = {hand: [], score: 0, acesHeld: 0}
+        deal(newPlayer1, newDeck1);
+        expect(newPlayer1.hand.length).toBe(2);
+        expect(newPlayer1.score).toBe(6);
+        expect(newPlayer1.acesHeld).toBe(1);
+        const newDeck2 = [
+            { name: '2 of Spades', value: 2 },
+            { name: '6 of Hearts', value: 6 }
+        ]
+        const newPlayer2 = {hand: [], score: 0, acesHeld: 0}
+        deal(newPlayer2, newDeck2);
+        expect(newPlayer2.hand.length).toBe(2);
+        expect(newPlayer2.score).toBe(8);
+        expect(newPlayer2.acesHeld).toBe(0);
+
     })
 })
