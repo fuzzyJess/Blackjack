@@ -67,7 +67,8 @@ function deal(player, deck) {
 
     // how do I deal with if an ace allow player to chose the value?
     // to fulfill scenarios just need to work out score so not bust... could 
-    // always start with aces as 11 and then change down to 1 if that prevents busting?
+    // always start with aces as 11 and then change down to 1 if that prevents 
+    // busting?
     
 }
     
@@ -78,10 +79,27 @@ function hit(player, deck) {
         }
         player.score += card.value;
         if (player.score > 21) {
-            player.validHand = false;
+            convertAces(player);
+            if (player.score > 21) {
+                player.validHand = false;
+            }
         }
     player.hand.push(card);
+    console.log(player)
     return player;
+}
+
+function convertAces(player) {
+    for (let i = 0; i < player.hand.length; i++) {
+        if (player.score > 21) {
+            if (player.hand[i].value === 11) {
+                player.hand[i].value -= 10;
+                player.score -= 10;
+                player.acesHeld -= 1;
+            }
+        }
+
+    }
 }
 
 exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit };
