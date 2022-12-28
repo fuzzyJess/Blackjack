@@ -55,6 +55,7 @@ function deal(player, deck) {
         }
         player.score += card.value;
         player.hand.push(card);
+        player.validHand = true;
     }
 
     // loops through twice each time removing a card from the deck passed in
@@ -104,9 +105,18 @@ function convertAces(player) {
     }
 }
 
-// need a stand() function to take a player, evaluate and return score
-// - at this point need logic to change values of any aces so score is as 
-// close to 21 as possible without being bust.
+function stand(player) {
+    if (player.validHand === true) {
+        return `Your score is ${player.score}`
+    } else {
+        return `You've gone bust your score is ${player.score}`
+    }
+    
+}
 
-exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit, convertAces };
+// need a stand() function to take a player, evaluate and return score
+// - at this point do I need logic to change values of any aces so score is as 
+// close to 21 as possible without being bust?
+
+exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit, convertAces, stand };
 
