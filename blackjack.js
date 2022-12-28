@@ -95,11 +95,18 @@ function convertAces(player) {
                 player.hand[i].value -= 10;
                 player.score -= 10;
                 player.acesHeld -= 1;
+                // not sure if I need an acesHeld variable at all as always 
+                // able to see if an ace depending on whether the card value 
+                // is 1 or 11
             }
         }
 
     }
 }
+
+// need a stand() function to take a player, evaluate and return score
+// - at this point need logic to change values of any aces so score is as 
+// close to 21 as possible without being bust.
 
 exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit, convertAces };
 

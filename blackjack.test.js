@@ -147,3 +147,26 @@ describe("convertAces() function", () => {
         expect(newPlayer.score).toBe(17);
     })
 })
+describe("Scenarios", () => {
+    test("Given I play a game of blackjack When I am dealt my opening hand Then I have two cards", () => {
+        const newPlayer = {hand: [], score: 0, acesHeld: 0};
+        const newDeck = shuffleDeck(deck);
+        deal(newPlayer, newDeck);
+        expect(newPlayer.hand.length).toBe(2);
+    })
+    test("Given I have a valid hand of cards When I choose to ‘hit’ Then I receive another card And my score is updated", () => {
+        const newPlayer = {
+            hand: [
+              { name: '6 of Hearts', value: 6 },
+              { name: '8 of Diamonds', value: 8 }
+            ],
+            score: 14,
+            acesHeld: 0
+          }
+          const newDeck = shuffleDeck(deck);
+          hit(newPlayer, newDeck);
+          let cardTotal = newPlayer.hand[0].value + newPlayer.hand[1].value + newPlayer.hand[2].value;
+          expect(newPlayer.hand.length).toBe(3);
+          expect(newPlayer.score).toBe(cardTotal);
+    })    
+})
