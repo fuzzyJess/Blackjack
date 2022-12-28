@@ -85,7 +85,6 @@ function hit(player, deck) {
             }
         }
     player.hand.push(card);
-    console.log(player)
     return player;
 }
 
@@ -102,5 +101,5 @@ function convertAces(player) {
     }
 }
 
-exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit };
+exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit, convertAces };
 

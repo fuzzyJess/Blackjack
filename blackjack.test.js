@@ -1,4 +1,4 @@
-const { shuffleDeck, getCardsFromDeck, deal, hit } = require('./blackjack');
+const { shuffleDeck, getCardsFromDeck, deal, hit, convertAces } = require('./blackjack');
 const { players } = require('./blackjack');
 const { deck } = require('./deck');
 
@@ -131,5 +131,19 @@ describe("hit() function", () => {
         let returnedPlayer = hit(newPlayer, newDeck);
         expect(returnedPlayer.validHand).toBe(true);
         expect(returnedPlayer.score).toBe(16);
+    })
+    test("if player.score exceeds 21 and there are no acesHeld then does not recalculate score", () => {
+        const newDeck = [{ name: 'Jack of Hearts', value: 10}];
+        const newPlayer = {hand: [{name: '6 of Diamonds', value: 6}, {name: '6 of Spades', value: 6}], score: 12, acesHeld: 0, validHand: true};
+        let returnedPlayer = hit(newPlayer, newDeck);
+        expect(returnedPlayer.validHand).toBe(false);
+        expect(returnedPlayer.score).toBe(22);
+    })
+})
+describe("convertAces() function", () => {
+    test("changes player score by -10 when bust and holding an ace", () => {
+        const newPlayer = {hand: [{name: 'Ace of Diamonds', value: 11}, {name: '6 of Spades', value: 6}, { name: 'Jack of Hearts', value: 10}], score: 27, acesHeld: 1, validHand: true};
+        convertAces(newPlayer);
+        expect(newPlayer.score).toBe(17);
     })
 })
