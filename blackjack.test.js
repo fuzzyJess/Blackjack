@@ -60,7 +60,6 @@ describe("deal() function", () => {
         const newPlayer1 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer1, newDeck1);
         expect(newPlayer1.acesHeld).toBe(1);
-        console.log(newPlayer1)
         const newDeck2 = [
             { name: '2 of Spades', value: 2 },
             { name: '6 of Hearts', value: 6 }
