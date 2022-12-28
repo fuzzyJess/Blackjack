@@ -50,7 +50,7 @@ function deal(player, deck) {
     
     for (let i = 0; i <= 1; i++) {
         let card = getCardsFromDeck(deck);
-        if (card.value === 1) {
+        if (card.value === 11) {
             player.acesHeld += 1;
         }
         player.score += card.value;
@@ -73,7 +73,7 @@ function deal(player, deck) {
     
 function hit(player, deck) {
     let card = getCardsFromDeck(deck);
-        if (card.value === 1) {
+        if (card.value === 11) {
             player.acesHeld += 1;
         }
         player.score += card.value;

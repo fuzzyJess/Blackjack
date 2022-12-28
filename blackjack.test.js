@@ -54,12 +54,13 @@ describe("deal() function", () => {
     })
     test("updates acesHeld variable when aces added to hand", () => {
         const newDeck1 = [
-            { name: 'Ace of Spades', value: 1 },
+            { name: 'Ace of Spades', value: 11 },
             { name: '2 of Spades', value: 2 }
         ];
         const newPlayer1 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer1, newDeck1);
         expect(newPlayer1.acesHeld).toBe(1);
+        console.log(newPlayer1)
         const newDeck2 = [
             { name: '2 of Spades', value: 2 },
             { name: '6 of Hearts', value: 6 }
@@ -70,13 +71,13 @@ describe("deal() function", () => {
     })
     test("returns player object with properties updated correctly", () => {
         const newDeck1 = [
-            { name: 'Ace of Spades', value: 1 },
+            { name: 'Ace of Spades', value: 11 },
             { name: '5 of Diamonds', value: 5 }
         ];
         const newPlayer1 = {hand: [], score: 0, acesHeld: 0};
         deal(newPlayer1, newDeck1);
         expect(newPlayer1.hand.length).toBe(2);
-        expect(newPlayer1.score).toBe(6);
+        expect(newPlayer1.score).toBe(16);
         expect(newPlayer1.acesHeld).toBe(1);
         const newDeck2 = [
             { name: '2 of Spades', value: 2 },
@@ -110,19 +111,26 @@ describe("hit() function", () => {
         expect(newPlayer.validHand).toBe(false);
     })
     test("returns player object with properties updated correctly", () => {
-        const newDeck = [{ name: 'Seven of Clubs', value: 7 }];
+        const newDeck = [{ name: '7 of Clubs', value: 7 }];
         const newPlayer1 = {hand: [{ name: 'Ace of Spades', value: 1 }, { name: '6 of Hearts', value: 6 }], score: 7, acesHeld: 1, validHand: true};
-        returnedPlayer = hit(newPlayer1, newDeck);
+        let returnedPlayer = hit(newPlayer1, newDeck);
         expect(returnedPlayer.hand.length).toBe(3);
         expect(returnedPlayer.score).toBe(14);
         expect(returnedPlayer.acesHeld).toBe(1);
         expect(returnedPlayer.validHand).toBe(true);
-        const newDeck2 = [{ name: 'Seven of Clubs', value: 7 }];
+        const newDeck2 = [{ name: '7 of Clubs', value: 7 }];
         const newPlayer2 = {hand: [{ name: '8 of Spades', value: 8 }, { name: '9 of Hearts', value: 9 }], score: 17, acesHeld: 0, validHand: true};
-        returnedPlayer = hit(newPlayer2, newDeck2);
-        expect(returnedPlayer.hand.length).toBe(3);
-        expect(returnedPlayer.score).toBe(24);
-        expect(returnedPlayer.acesHeld).toBe(0);
-        expect(returnedPlayer.validHand).toBe(false);
+        let returnedPlayer2 = hit(newPlayer2, newDeck2);
+        expect(returnedPlayer2.hand.length).toBe(3);
+        expect(returnedPlayer2.score).toBe(24);
+        expect(returnedPlayer2.acesHeld).toBe(0);
+        expect(returnedPlayer2.validHand).toBe(false);
+    })
+    test("if player.score exceeds 21 and acesHeld is over 1 then recalculates score with Aces having a value of 1", () => {
+        const newDeck = [{ name: 'Jack of Hearts', value: 10}];
+        const newPlayer = {hand: [{name: 'Ace of Diamonds', value: 11}, {name: '6 of Spades', value: 6}], score: 16, acesHeld: 1, validHand: true};
+        let returnedPlayer = hit(newPlayer, newDeck);
+        expect(returnedPlayer.validHand).toBe(true);
+        expect(returnedPlayer.score).toBe(16);
     })
 })
