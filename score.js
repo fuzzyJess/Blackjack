@@ -1,8 +1,8 @@
 function checkScore(hand) {
     const handScore = { score: 0, validHand: false };
-    for (let i = 0; i < hand.length; i++) {
-        handScore.score += hand[i].value;
-    }
+    hand.forEach(card => {
+        handScore.score += card.value;
+    });
     if (handScore.score <= 21) {
         handScore.validHand = true;
     } else if (handScore.score > 21) {
@@ -12,19 +12,19 @@ function checkScore(hand) {
 };
 
 function convertAces(hand, handScore) {
-    for (let i = 0; i < hand.length; i++) {
+    hand.forEach(card => {
         if (handScore.score > 21) {
-            if (hand[i].value === 11) {
+            if (card.value === 11) {
                 handScore.score -= 10;
-                hand[i].value -= 10;
-                // removes 10 from overall score and 10 from value 
-                // of ace
-            }
-        }
+                card.value -= 10;
+                // removes 10 from overall score 
+                // and 10 from value of each ace as needed
+            };
+        };
         if (handScore.score <= 21) {
             handScore.validHand = true;
-        }
-    }
-}
+        };
+    });
+};
 
 exporting: module.exports = { checkScore };
