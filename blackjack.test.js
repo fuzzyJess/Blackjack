@@ -1,4 +1,4 @@
-const { shuffleDeck, getCardsFromDeck, deal, hit, convertAces } = require('./blackjack');
+const { shuffleDeck, getCardsFromDeck, deal, hit, convertAces, stand } = require('./blackjack');
 const { players } = require('./blackjack');
 const { deck } = require('./deck');
 
@@ -169,4 +169,24 @@ describe("Scenarios", () => {
           expect(newPlayer.hand.length).toBe(3);
           expect(newPlayer.score).toBe(cardTotal);
     })    
+    test("Given I have a valid hand of cards When I choose to ‘stand’ Then I receive no further cards And my score is evaluated", () => {
+        newPlayer = {hand: [], score: 0, acesHeld: 0};
+        deal(newPlayer, shuffleDeck(deck));
+        let evaluation = stand(newPlayer);
+        let evaluationCheck = `You have a valid hand and your score is ` + newPlayer.score;
+        expect(evaluation).toBe(evaluationCheck);
+    })
+    // not sure how best to test this one ^
+    test("Given my score is updated or evaluated When it is 21 or less Then I have a valid hand", () => {
+        const newDeck1 = [{ name: '9 of Clubs', value: 9 }];
+        const newPlayer1 = {hand: [{ name: 'Ace of Spades', value: 1 }, { name: '8 of Hearts', value: 8 }], score: 9, acesHeld: 1, validHand: true};
+        let returnedPlayer = hit(newPlayer1, newDeck1);
+        expect(returnedPlayer.score).toBe(18);
+        expect(returnedPlayer.validHand).toBe(true);
+        const newDeck2 = [{ name: '9 of Spades', value: 9}];
+        const newPlayer2 = {hand: [ {name: '5 of Diamonds', value: 5}, {name: '7 of Hearts', value: 7}], score: 12, acesHeld: 0, validHand: true}
+        hit(newPlayer2, newDeck2);
+        expect(newPlayer2.score).toBe(21);
+        expect(newPlayer2.validHand).toBe(true);
+    })
 })

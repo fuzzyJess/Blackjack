@@ -71,6 +71,9 @@ function deal(player, deck) {
     // always start with aces as 11 and then change down to 1 if that prevents 
     // busting?
     
+    // Perhaps not bother returning player from deal & hit functions 
+    // could return message if player gets blackjack when dealt an ace & card with 
+    // a value of 10.
 }
     
 function hit(player, deck) {
@@ -107,7 +110,7 @@ function convertAces(player) {
 
 function stand(player) {
     if (player.validHand === true) {
-        return `Your score is ${player.score}`
+        return `You have a valid hand and your score is ${player.score}`
     } else {
         return `You've gone bust your score is ${player.score}`
     }
@@ -117,6 +120,12 @@ function stand(player) {
 // need a stand() function to take a player, evaluate and return score
 // - at this point do I need logic to change values of any aces so score is as 
 // close to 21 as possible without being bust?
+// should the stand function set a variable that prevents further cards being
+// recieved?
+
+// stand function could return two possible valid scores if player is holding 
+// any aces.
+
 
 exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit, convertAces, stand };
 
