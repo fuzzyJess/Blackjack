@@ -1,3 +1,5 @@
+function createDeck() {
+
 const deck = [];
 
 for (let j = 0; j < 4; j++) {
@@ -41,4 +43,6 @@ for (let j = 0; j < 4; j++) {
         deck.push({name: card, value: cardValue})
     } 
 }
-exporting: module.exports = { deck };
+return deck
+}
+exporting: module.exports = { createDeck };
