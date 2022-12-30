@@ -1,4 +1,5 @@
 const { createDeck } = require('./deck');
+const { checkScore } = require('./score');
 
 function shuffleDeck(deck) {
     const deckCopy = [...deck]
@@ -23,5 +24,13 @@ function deal(deck) {
     return hand;
 }
 
+function hit(hand, deck) {
+    let card = getCardsFromDeck(deck);
+    let handScore = checkScore(hand);
+    if (handScore.validHand === true) {
+        hand.push(card);
+    }
+    return hand;
+}
 
-exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal };
+exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal, hit };
