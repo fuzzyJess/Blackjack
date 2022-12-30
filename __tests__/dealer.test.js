@@ -60,4 +60,11 @@ describe("hit() function", () => {
         hit(hand, newDeck);
         expect(hand.length).toBe(3);
     })
+
+    test("no more cards are added to hand when value of hand is above 21", () => {
+        const newDeck = createDeck();
+        let hand = [{ name: '7 of Hearts', value: 7 }, { name: '9 of Clubs', value: 9 }, { name: 'King of Hearts', value: 10 }];
+        hit(hand, newDeck);
+        expect(hand.length).toBe(3);
+    })
 });
