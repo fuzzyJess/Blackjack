@@ -1,5 +1,5 @@
 const { createDeck } = require('../deck');
-const { shuffleDeck, getCardsFromDeck } = require('../dealer');
+const { shuffleDeck, getCardsFromDeck, deal } = require('../dealer');
 
 describe("shuffleDeck() function", () => {
     test("returns an array containing full set of card objects", () => {
@@ -27,5 +27,13 @@ describe("getCardsFromDeck() function", () => {
         let newDeck = createDeck();
         getCardsFromDeck(newDeck);
         expect(newDeck.length).toBe(51);
+    })
+})
+
+describe("deal() function", () => {
+    test("returns two cards from deck passed in", () => {
+        let deck = createDeck();
+        let newHand = deal(deck);
+        expect(newHand.length).toBe(2);
     })
 })

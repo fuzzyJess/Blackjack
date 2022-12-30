@@ -14,5 +14,14 @@ function getCardsFromDeck(deck) {
 }
 // returns a card from the end of a deck removing it from the deck
 
+function deal(deck) {
+    hand = [];
+    for (let i = 0; i <= 1; i++) {
+        let card = getCardsFromDeck(deck);
+        hand.push(card);
+    }
+    return hand;
+}
 
-exporting: module.exports = { shuffleDeck, getCardsFromDeck };
+
+exporting: module.exports = { shuffleDeck, getCardsFromDeck, deal };
