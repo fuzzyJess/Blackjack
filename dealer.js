@@ -8,4 +8,11 @@ function shuffleDeck(deck) {
     return shuffledDeck;
 };
 
-exporting: module.exports = { shuffleDeck };
+function getCardsFromDeck(deck) {
+    let card = deck.pop();
+    return card;
+}
+// returns a card from the end of a deck removing it from the deck
+
+
+exporting: module.exports = { shuffleDeck, getCardsFromDeck };
