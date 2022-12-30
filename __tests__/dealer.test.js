@@ -32,8 +32,13 @@ describe("getCardsFromDeck() function", () => {
 
 describe("deal() function", () => {
     test("returns two cards from deck passed in", () => {
-        let deck = createDeck();
+        let deck = [
+            { name: 'Ace of Spades', value: 11 },
+            { name: '5 of Diamonds', value: 5 }
+        ];
         let newHand = deal(deck);
         expect(newHand.length).toBe(2);
+        expect(newHand[0]).toEqual({ name: '5 of Diamonds', value: 5 })
     })
+    
 })
