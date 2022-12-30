@@ -54,4 +54,10 @@ describe("hit() function", () => {
         hit(hand, newDeck);
         expect(newDeck.length).toBe(51);
     });
+    test("adds one more card to hand when value of hand is below 21", () => {
+        const newDeck = createDeck();
+        let hand = [{ name: '5 of Diamonds', value: 5 }, { name: 'Ace of Spades', value: 11 }];
+        hit(hand, newDeck);
+        expect(hand.length).toBe(3);
+    })
 });
