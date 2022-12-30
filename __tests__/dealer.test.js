@@ -40,5 +40,9 @@ describe("deal() function", () => {
         expect(newHand.length).toBe(2);
         expect(newHand[0]).toEqual({ name: '5 of Diamonds', value: 5 })
     })
-    
+    test("removes two cards from deck passed in", () => {
+        let deck = createDeck();
+        deal(deck);
+        expect(deck.length).toBe(50);
+    })
 })
