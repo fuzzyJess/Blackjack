@@ -6,6 +6,9 @@ function createPlayer(playerName) {
     return player;
 }
 
+const dealer = createPlayer(dealer);
+// dealer must hit at 16 or below otherwise must stand
+
 function stand(player) {
     let finalScore = checkScore(player.hand);
     return finalScore;
