@@ -1,5 +1,7 @@
 // import inquirer from 'inquirer';
 const { createPlayer } = require('./player');
+const { deal, shuffleDeck } = require('./dealer');
+const { createDeck } = require('./deck');
 
 // need to add new players to game using createPlayer for each new player
 // each player gets a hand dealt to them in turn
@@ -11,8 +13,11 @@ const { createPlayer } = require('./player');
 const gamePlayers = [];
 
 function newGame(players) {
+    const deck = shuffleDeck(createDeck());
     players.forEach(player => {
-        gamePlayers.push(createPlayer(player));
+        newPlayer = createPlayer(player);
+        newPlayer.hand = deal(deck)
+        gamePlayers.push(newPlayer);
     });
        
 }
