@@ -6,7 +6,7 @@ function createPlayer(playerName) {
     return player;
 }
 
-const dealer = createPlayer(dealer);
+const dealer = createPlayer("dealerDan");
 // dealer must hit at 16 or below otherwise must stand
 
 function stand(player) {
