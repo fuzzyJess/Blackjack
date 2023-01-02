@@ -2,6 +2,7 @@
 const { createPlayer } = require('./player');
 const { deal, shuffleDeck } = require('./dealer');
 const { createDeck } = require('./deck');
+const { checkScore } = require('./score');
 
 // need to add new players to game using createPlayer for each new player
 // each player gets a hand dealt to them in turn
@@ -16,7 +17,8 @@ function newGame(players) {
     const deck = shuffleDeck(createDeck());
     players.forEach(player => {
         newPlayer = createPlayer(player);
-        newPlayer.hand = deal(deck)
+        newPlayer.hand = deal(deck);
+        newPlayer.currentScore = checkScore(newPlayer.hand);
         gamePlayers.push(newPlayer);
     });
        

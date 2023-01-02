@@ -12,4 +12,9 @@ describe("newGame() function", () => {
         expect(gamePlayers[0].hand.length).toBe(2);
         expect(typeof gamePlayers[0].hand[0]).toBe("object");
     });
+    test("each player gets an initial score", () => {
+        const players = ["Jessica", "Rich"];
+        newGame(players);
+        expect(typeof gamePlayers[0].currentScore).toBe("object");
+    })
 });
