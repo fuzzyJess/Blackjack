@@ -24,13 +24,18 @@ function startGame(players, deck) {
     });
 }
 
-function playGame(gamePlayers, deck) {
-
-    do {
-        hit(newPlayer.hand, deck);
-        newPlayer.currentScore = checkScore(newPlayer.hand);
-    } while (newPlayer.currentScore.score < 17);
-    
+function playGame(deck) {
+    gamePlayers.forEach(player => {
+        do {
+        hit(player.hand, deck);
+        player.currentScore = checkScore(player.hand);
+        } while (player.currentScore.score < 17);
+    })
 }
+
+gamePlayers.forEach(player => {
+    gamePlayers.pop();
+})
+// clears gamePlayers array once game is finished
 
 exporting: module.exports = { gamePlayers, deck, startGame, playGame }
