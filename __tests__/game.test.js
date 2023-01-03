@@ -52,10 +52,10 @@ describe("finishGame() function", () => {
         ];
         playGame(deck2);
         let result = finishGame();
-        console.log(gamePlayers)
         expect(result.message).toBe("No one won!");
     })
     test("if all players have a valid hand then checks to see who has the highest score", () => {
+        clearGamePlayers();
         const players = ["Jessica", "Rich"];
         const deck1 = [
             { name: '8 of Diamonds', value: 8 },

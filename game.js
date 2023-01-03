@@ -35,12 +35,23 @@ function playGame(deck) {
 
 function finishGame() {
     let gameResult = {};
-    let areBust = gamePlayers.every(player => player.currentScore.score > 21);
+    let areBust = gamePlayers.every(player => player.currentScore.validHand === false);
         if (areBust === true) {
             // if there is no player with a score of less than 22
             gameResult.message = "No one won!"
         } 
-    
+    let noneBust = gamePlayers.every(player => player.currentScore.validHand === true);
+        if (noneBust === true) {
+            // if none of the players are bust
+            const scores = [];
+            gamePlayers.forEach(player => {
+                scores.push(player.currentScore.score);
+            })
+            let highestScore = Math.max(...scores);
+            let highestScoreIndex = scores.findIndex((score) => score === highestScore);
+            gameResult.message = `${gamePlayers[highestScoreIndex].playerName} won!`
+        }
+
     return gameResult;
 }
 function clearGamePlayers() {
