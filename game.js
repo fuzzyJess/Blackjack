@@ -26,22 +26,23 @@ function startGame(players, deck) {
 
 function playGame(deck) {
     gamePlayers.forEach(player => {
-        do {
-        hit(player.hand, deck);
-        player.currentScore = checkScore(player.hand);
-        } while (player.currentScore.score < 17);
+        while (player.currentScore.score < 17) {
+            hit(player.hand, deck);
+            player.currentScore = checkScore(player.hand);
+        };
     })
 }
 
 function finishGame() {
     let gameResult = {};
+    console.log(gamePlayers[0].playerName, gamePlayers[0].hand, "< in finishGame")
+    console.log(gamePlayers[1].playerName, gamePlayers[1].hand, "< in finishGame")
     if (!gamePlayers.find(player => player.hand.score <= 21)) {
         // if there is no player with a score of less than 21
         gameResult.message = "No one won!"
     }
     return gameResult;
 }
-
 gamePlayers.forEach(player => {
     gamePlayers.pop();
 })
