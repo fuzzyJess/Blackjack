@@ -33,9 +33,18 @@ function playGame(deck) {
     })
 }
 
+function finishGame() {
+    let gameResult = {};
+    if (!gamePlayers.find(player => player.hand.score <= 21)) {
+        // if there is no player with a score of less than 21
+        gameResult.message = "No one won!"
+    }
+    return gameResult;
+}
+
 gamePlayers.forEach(player => {
     gamePlayers.pop();
 })
 // clears gamePlayers array once game is finished
 
-exporting: module.exports = { gamePlayers, deck, startGame, playGame }
+exporting: module.exports = { gamePlayers, deck, startGame, playGame, finishGame }
