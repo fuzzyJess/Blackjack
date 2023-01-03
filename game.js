@@ -35,17 +35,20 @@ function playGame(deck) {
 
 function finishGame() {
     let gameResult = {};
-    console.log(gamePlayers[0].playerName, gamePlayers[0].hand, "< in finishGame")
-    console.log(gamePlayers[1].playerName, gamePlayers[1].hand, "< in finishGame")
-    if (!gamePlayers.find(player => player.hand.score <= 21)) {
-        // if there is no player with a score of less than 21
-        gameResult.message = "No one won!"
-    }
+    let areBust = gamePlayers.every(player => player.currentScore.score > 21);
+        if (areBust === true) {
+            // if there is no player with a score of less than 22
+            gameResult.message = "No one won!"
+        } 
+    
     return gameResult;
 }
-gamePlayers.forEach(player => {
-    gamePlayers.pop();
-})
+function clearGamePlayers() {
+    while (gamePlayers.length > 0) {
+        gamePlayers.pop();
+    }
+}
+
 // clears gamePlayers array once game is finished
 
-exporting: module.exports = { gamePlayers, deck, startGame, playGame, finishGame }
+exporting: module.exports = { gamePlayers, deck, startGame, playGame, finishGame, clearGamePlayers }

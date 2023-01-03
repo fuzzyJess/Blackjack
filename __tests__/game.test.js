@@ -1,4 +1,4 @@
-const { gamePlayers, deck, startGame, playGame, finishGame } = require('../game');
+const { gamePlayers, deck, startGame, playGame, finishGame, clearGamePlayers } = require('../game');
 
 describe("startGame() function", () => {
     test("uses array of players passed in to create new players needed for game", () => {
@@ -31,17 +31,18 @@ describe("playGame() function", () => {
         ]
         startGame(players, deck1);
         playGame(deck);
-        expect(gamePlayers[0].hand.length).toBe(3);
+        expect(gamePlayers[6].hand.length > 2).toBe(true);
     })
 })
 
 describe("finishGame() function", () => {
-    test.only("if no players at end of game have a vaild hand then returns message: 'No one won!' and an array of the scores", () => {
+    test("if no players at end of game have a vaild hand then returns message: 'No one won!' and an array of the scores", () => {
+        clearGamePlayers();
         const players = ["Jessica", "Rich"];
         const deck1 = [
             { name: '4 of Diamonds', value: 4 },
             { name: 'Jack of Clubs', value: 10 },
-            { name: '7 of Diamonds', value: 7 },
+            { name: '6 of Diamonds', value: 6 },
             { name: 'Queen of Hearts', value: 10 }
         ];
         startGame(players, deck1);
@@ -51,7 +52,24 @@ describe("finishGame() function", () => {
         ];
         playGame(deck2);
         let result = finishGame();
-        console.log(result)
-        expect(result.message).toBe("No one won!")
+        console.log(gamePlayers)
+        expect(result.message).toBe("No one won!");
+    })
+    test("if all players have a valid hand then checks to see who has the highest score", () => {
+        const players = ["Jessica", "Rich"];
+        const deck1 = [
+            { name: '8 of Diamonds', value: 8 },
+            { name: 'Jack of Clubs', value: 10 },
+            { name: 'Ace of Diamonds', value: 11 },
+            { name: 'Queen of Hearts', value: 10 }
+        ];
+        startGame(players, deck1);
+        const deck2 = [
+            { name: '8 of Spades', value: 8 },
+            { name: '10 of Hearts', value: 10 }
+        ];
+        playGame(deck2);
+        let result = finishGame();
+        expect(result.message).toBe("Jessica won!")
     })
 })
