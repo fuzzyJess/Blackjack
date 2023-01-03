@@ -1,6 +1,6 @@
 // import inquirer from 'inquirer';
 const { createPlayer } = require('./player');
-const { deal, shuffleDeck } = require('./dealer');
+const { shuffleDeck, deal, hit } = require('./dealer');
 const { createDeck } = require('./deck');
 const { checkScore } = require('./score');
 
@@ -12,16 +12,23 @@ const { checkScore } = require('./score');
 // message at end to say who won that hand
 
 const gamePlayers = [];
+const deck = shuffleDeck(createDeck());
 
-function newGame(players) {
-    const deck = shuffleDeck(createDeck());
+function newGame(players, deck) {
     players.forEach(player => {
         newPlayer = createPlayer(player);
         newPlayer.hand = deal(deck);
         newPlayer.currentScore = checkScore(newPlayer.hand);
+
+        do {
+            hit(newPlayer.hand, deck);
+            newPlayer.currentScore = checkScore(newPlayer.hand);
+        } while (newPlayer.currentScore.score < 17);
+        
         gamePlayers.push(newPlayer);
+                
     });
        
 }
 
-exporting: module.exports = { gamePlayers, newGame }
+exporting: module.exports = { gamePlayers, deck, newGame }
