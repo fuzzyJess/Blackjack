@@ -28,47 +28,39 @@ function playGame(player, deck) {
     gamePlayers.forEach(player => {
         player.hand = deal(deck);
         player.currentScore = checkScore(player.hand);
-        console.log(`${player.playerName} was dealt a ${player.hand[0].name} and a ${player.hand[1].name}. ${player.playerName}'s card total is ${player.currentScore.score}.`)
+        console.log(`${player.playerName} was dealt a ${player.hand[0].name} and a ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
                 
         while (player.currentScore.score < 17) {
-            dealerPlay(player, deck)
-        } 
+            dealerPlay(player, deck);
+        }; 
         
         if (player.currentScore.score >= 17 && player.currentScore.score < 22){
-            console.log(`${player.playerName} stands and has a final score of ${stand(player).score}`)
-        } 
-    })
+            console.log(`${player.playerName} stands and has a final score of ${stand(player).score}`);
+        }; 
+    });
 
         return gamePlayers;
 }
 
-function finishGame() {
-    let gameResult = {};
-    let areBust = gamePlayers.every(player => player.currentScore.validHand === false);
-        if (areBust === true) {
-            // if there is no player with a score of less than 22
-            gameResult.message = "No one won!"
+
+function evaluateGame(players) {
+    let winner = "";
+    if (players[0].currentScore.validHand === true) {
+        if (players[0].currentScore.score > players[1].currentScore.score || players[1].currentScore.validHand === false) {
+            winner = players[0].playerName;
         } 
-    let noneBust = gamePlayers.every(player => player.currentScore.validHand === true);
-        if (noneBust === true) {
-            // if none of the players are bust
-            const scores = [];
-            gamePlayers.forEach(player => {
-                scores.push(player.currentScore.score);
-            })
-            let highestScore = Math.max(...scores);
-            let highestScoreIndex = scores.findIndex((score) => score === highestScore);
-            gameResult.message = `${gamePlayers[highestScoreIndex].playerName} won!`
-
-            // working when all scores are different... 
-            // pretty sure won't work if more than one player has the same score...
-            // may need an if to check whether more than one has the highest score and return a
-            // different result message.
-        }
-
-    return gameResult;
+    } 
+    if (players[1].currentScore.validHand === true) {
+        if (players[1].currentScore.score > players[0].currentScore.score || players[0].currentScore.validHand === false) {
+            winner = players[1].playerName;
+        } 
+    }
+    if (winner.length > 0) {
+        console.log(`${winner} has won!`)
+    } else {
+        console.log("It was a tie!")
+    }
+    
 }
 
-// clears gamePlayers array once game is finished
-
-exporting: module.exports = { deck, playGame, finishGame }
+exporting: module.exports = { playGame, evaluateGame }
