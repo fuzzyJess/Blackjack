@@ -1,24 +1,8 @@
 // import inquirer from 'inquirer';
 const { createPlayer, stand, dealerPlay } = require('./player');
-const { shuffleDeck, deal, hit } = require('./deal');
-const { createDeck } = require('./deck');
+const { deal } = require('./deal');
+
 const { checkScore } = require('./score');
-
-// only allow one player game against a dealer
-// new player gets hand dealt first and to start with plays with dealerPlay rules
-// player object is returned
-
-// message to say score of player at end of hand
-
-// dealer gets hand dealt and plays with dealerPlay rules
-// dealer is returned
-
-// message to say score of dealer
-
-// evaluate two scores and message to say who won/was it a tie
-
-
-const deck = shuffleDeck(createDeck());
 
 function playGame(player, deck) {
     const gamePlayers = addPlayers(player);
