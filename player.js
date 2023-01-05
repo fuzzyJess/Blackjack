@@ -1,4 +1,5 @@
 const { checkScore } = require('./score')
+const { hit } = require('./deal')
 
 function createPlayer(playerName) {
     const player = {};
@@ -6,12 +7,16 @@ function createPlayer(playerName) {
     return player;
 }
 
-const dealer = createPlayer("dealerDan");
-// dealer must hit at 16 or below otherwise must stand
-
 function stand(player) {
     let finalScore = checkScore(player.hand);
     return finalScore;
 }
 
-exporting: module.exports = { createPlayer, stand };
+function dealerPlay(player, deck) {
+    while (player.currentScore.score < 17) {
+        hit(player.hand, deck);
+        player.currentScore = checkScore(player.hand);
+    };
+}
+
+exporting: module.exports = { createPlayer, stand, dealerPlay };

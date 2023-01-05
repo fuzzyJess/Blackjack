@@ -19,22 +19,6 @@ describe("startGame() function", () => {
     })
 });
 
-describe("playGame() function", () => {
-    test("if player has a score of less than 17 they will get a new card", () => {
-        const players = ["Jessica"];
-        const deck1 = [
-            { name: '4 of Diamonds', value: 4 },
-            { name: 'Jack of Clubs', value: 10 }
-        ];
-        const deck2 = [
-            { name: '5 of Hearts', value: 4 }
-        ]
-        startGame(players, deck1);
-        playGame(deck);
-        expect(gamePlayers[6].hand.length > 2).toBe(true);
-    })
-})
-
 describe("finishGame() function", () => {
     test("if no players at end of game have a vaild hand then returns message: 'No one won!' and an array of the scores", () => {
         clearGamePlayers();
