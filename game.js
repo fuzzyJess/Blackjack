@@ -1,36 +1,51 @@
 // import inquirer from 'inquirer';
-const { createPlayer } = require('./player');
+const { createPlayer, stand, dealerPlay } = require('./player');
 const { shuffleDeck, deal, hit } = require('./deal');
 const { createDeck } = require('./deck');
 const { checkScore } = require('./score');
 
-// need to add new players to game using createPlayer for each new player
-// each player gets a hand dealt to them in turn
-// each player gets to chose to either stand or hit until either bust or standing...
-    // could try to do this with a react app and promises...
-// each player gets a message with their final score/whether they are bust
-// dealer plays last - stands at 17 or above otherwise choosing hit
-// message at end to say who won that hand
+// only allow one player game against a dealer
+// new player gets hand dealt first and to start with plays with dealerPlay rules
+// player object is returned
 
-const gamePlayers = [];
+// message to say score of player at end of hand
+
+// dealer gets hand dealt and plays with dealerPlay rules
+// dealer is returned
+
+// message to say score of dealer
+
+// evaluate two scores and message to say who won/was it a tie
+
+
 const deck = shuffleDeck(createDeck());
 
-function startGame(players, deck) {
-    players.forEach(player => {
+function playGame(player, deck) {
+    const gamePlayers = [];
         newPlayer = createPlayer(player);
         newPlayer.hand = deal(deck);
         newPlayer.currentScore = checkScore(newPlayer.hand);
-        gamePlayers.push(newPlayer);
-    });
-}
+        console.log(`${newPlayer.playerName} was dealt a ${newPlayer.hand[0].name} and a ${newPlayer.hand[1].name}. ${newPlayer.playerName}'s card total is ${newPlayer.currentScore.score}.`)
+        
+        
+        if (newPlayer.currentScore.score < 17) {
+            dealerPlay(newPlayer, deck)
+        } else if (newPlayer.currentScore.score >= 17 && newPlayer.currentScore.score < 22){
+            console.log(`${newPlayer.playerName} stands and has a final score of ${stand(newPlayer).score}`)
+        }
+        
+        dealer = createPlayer("dealer Dan");
+        dealer.hand = deal(deck);
+        dealer.currentScore = checkScore(dealer.hand);
+        console.log(`${dealer.playerName} was dealt a ${dealer.hand[0].name} and a ${dealer.hand[1].name}. ${dealer.playerName}'s card total is ${dealer.currentScore.score}.`)
+        if (dealer.currentScore.score < 17) {
+            dealerPlay(dealer, deck)
+        } else if (dealer.currentScore.score >= 17 && dealer.currentScore.score < 22){
+            console.log(`${dealer.playerName} stands and has a final score of ${stand(dealer).score}`)
+        }
 
-function playGame(deck) {
-    gamePlayers.forEach(player => {
-        while (player.currentScore.score < 17) {
-            hit(player.hand, deck);
-            player.currentScore = checkScore(player.hand);
-        };
-    })
+        gamePlayers.push(newPlayer);
+        return gamePlayers;
 }
 
 function finishGame() {
@@ -59,12 +74,7 @@ function finishGame() {
 
     return gameResult;
 }
-function clearGamePlayers() {
-    while (gamePlayers.length > 0) {
-        gamePlayers.pop();
-    }
-}
 
 // clears gamePlayers array once game is finished
 
-exporting: module.exports = { gamePlayers, deck, startGame, playGame, finishGame, clearGamePlayers }
+exporting: module.exports = { deck, playGame, finishGame }
