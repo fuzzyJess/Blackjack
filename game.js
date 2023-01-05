@@ -1,6 +1,6 @@
 // import inquirer from 'inquirer';
 const { createPlayer } = require('./player');
-const { shuffleDeck, deal, hit } = require('./dealer');
+const { shuffleDeck, deal, hit } = require('./deal');
 const { createDeck } = require('./deck');
 const { checkScore } = require('./score');
 
@@ -50,6 +50,11 @@ function finishGame() {
             let highestScore = Math.max(...scores);
             let highestScoreIndex = scores.findIndex((score) => score === highestScore);
             gameResult.message = `${gamePlayers[highestScoreIndex].playerName} won!`
+
+            // working when all scores are different... 
+            // pretty sure won't work if more than one player has the same score...
+            // may need an if to check whether more than one has the highest score and return a
+            // different result message.
         }
 
     return gameResult;
