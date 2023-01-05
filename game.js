@@ -60,4 +60,4 @@ function evaluateGame(players) {
     
 }
 
-exporting: module.exports = { playGame, addPlayers, dealCards, evaluateGame }
+exporting: module.exports = { playGame, addPlayers, dealCards, hitExtraCards, evaluateGame }
