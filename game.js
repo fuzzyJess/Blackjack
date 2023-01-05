@@ -21,27 +21,40 @@ const { checkScore } = require('./score');
 const deck = shuffleDeck(createDeck());
 
 function playGame(player, deck) {
+    const gamePlayers = addPlayers(player);
+    dealCards(gamePlayers, deck);
+    hitExtraCards(gamePlayers, deck);
+    evaluateGame(gamePlayers);
+    
+    return gamePlayers;
+}
+
+function addPlayers(player) {
     const gamePlayers = [];
     gamePlayers.push(createPlayer(player));
     gamePlayers.push(createPlayer("Dealer Dan"));
-        
+    return gamePlayers;
+}
+
+function dealCards(gamePlayers, deck) {
     gamePlayers.forEach(player => {
         player.hand = deal(deck);
         player.currentScore = checkScore(player.hand);
         console.log(`${player.playerName} was dealt a ${player.hand[0].name} and a ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
-                
+    })
+}
+
+function hitExtraCards(gamePlayers, deck) {
+    gamePlayers.forEach(player => {    
         while (player.currentScore.score < 17) {
             dealerPlay(player, deck);
         }; 
         
         if (player.currentScore.score >= 17 && player.currentScore.score < 22){
-            console.log(`${player.playerName} stands and has a final score of ${stand(player).score}`);
+            console.log(`${player.playerName} stands with a final score of ${stand(player).score}`);
         }; 
     });
-
-        return gamePlayers;
 }
-
 
 function evaluateGame(players) {
     let winner = "";
