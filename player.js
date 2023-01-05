@@ -16,6 +16,10 @@ function dealerPlay(player, deck) {
     while (player.currentScore.score < 17) {
         hit(player.hand, deck);
         player.currentScore = checkScore(player.hand);
+        console.log(`${player.playerName} recieves a ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
+        if (player.currentScore.score > 21) {
+            console.log(`${player.playerName} is bust.`)
+        }
     };
 }
 
