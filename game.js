@@ -22,29 +22,23 @@ const deck = shuffleDeck(createDeck());
 
 function playGame(player, deck) {
     const gamePlayers = [];
-        newPlayer = createPlayer(player);
-        newPlayer.hand = deal(deck);
-        newPlayer.currentScore = checkScore(newPlayer.hand);
-        console.log(`${newPlayer.playerName} was dealt a ${newPlayer.hand[0].name} and a ${newPlayer.hand[1].name}. ${newPlayer.playerName}'s card total is ${newPlayer.currentScore.score}.`)
+    gamePlayers.push(createPlayer(player));
+    gamePlayers.push(createPlayer("Dealer Dan"));
         
+    gamePlayers.forEach(player => {
+        player.hand = deal(deck);
+        player.currentScore = checkScore(player.hand);
+        console.log(`${player.playerName} was dealt a ${player.hand[0].name} and a ${player.hand[1].name}. ${player.playerName}'s card total is ${player.currentScore.score}.`)
+                
+        while (player.currentScore.score < 17) {
+            dealerPlay(player, deck)
+        } 
         
-        if (newPlayer.currentScore.score < 17) {
-            dealerPlay(newPlayer, deck)
-        } else if (newPlayer.currentScore.score >= 17 && newPlayer.currentScore.score < 22){
-            console.log(`${newPlayer.playerName} stands and has a final score of ${stand(newPlayer).score}`)
-        }
-        
-        dealer = createPlayer("dealer Dan");
-        dealer.hand = deal(deck);
-        dealer.currentScore = checkScore(dealer.hand);
-        console.log(`${dealer.playerName} was dealt a ${dealer.hand[0].name} and a ${dealer.hand[1].name}. ${dealer.playerName}'s card total is ${dealer.currentScore.score}.`)
-        if (dealer.currentScore.score < 17) {
-            dealerPlay(dealer, deck)
-        } else if (dealer.currentScore.score >= 17 && dealer.currentScore.score < 22){
-            console.log(`${dealer.playerName} stands and has a final score of ${stand(dealer).score}`)
-        }
+        if (player.currentScore.score >= 17 && player.currentScore.score < 22){
+            console.log(`${player.playerName} stands and has a final score of ${stand(player).score}`)
+        } 
+    })
 
-        gamePlayers.push(newPlayer);
         return gamePlayers;
 }
 
