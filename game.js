@@ -33,7 +33,6 @@ function dealCards(gamePlayers, deck) {
 function hitExtraCards(gamePlayers, deck) {
     gamePlayers.forEach(player => {    
         dealerPlay(player, deck);
-       
     });
 }
 

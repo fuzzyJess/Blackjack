@@ -17,19 +17,6 @@ describe("shuffleDeck() function", () => {
     });
 });
 
-describe("getCardsFromDeck() function", () => {
-    test("returns card removed from end of deck", () => {
-        let newDeck = createDeck();
-        const card = getCardsFromDeck(newDeck);
-        expect(typeof card).toBe("object");
-    });     
-    test("deck contains one less card after function", () => {
-        let newDeck = createDeck();
-        getCardsFromDeck(newDeck);
-        expect(newDeck.length).toBe(51);
-    });
-});
-
 describe("deal() function", () => {
     test("returns two cards from deck passed in", () => {
         let deck = [
@@ -50,21 +37,12 @@ describe("deal() function", () => {
 describe("hit() function", () => {
     test("removes one card from deck passed in", () => {
         const newDeck = createDeck();
-        let hand = [{ name: '5 of Diamonds', value: 5 }, { name: 'Ace of Spades', value: 11 }];
-        hit(hand, newDeck);
+        hit(newDeck);
         expect(newDeck.length).toBe(51);
     });
-    test("adds one more card to hand when value of hand is below 21", () => {
-        const newDeck = createDeck();
-        let hand = [{ name: '5 of Diamonds', value: 5 }, { name: 'Ace of Spades', value: 11 }];
-        hit(hand, newDeck);
-        expect(hand.length).toBe(3);
-    })
-
-    test("no more cards are added to hand when value of hand is above 21", () => {
-        const newDeck = createDeck();
-        let hand = [{ name: '7 of Hearts', value: 7 }, { name: '9 of Clubs', value: 9 }, { name: 'King of Hearts', value: 10 }];
-        hit(hand, newDeck);
-        expect(hand.length).toBe(3);
-    })
+    test("returns the card removed from the deck", () => {
+        const testCard = [{ name: '7 of Hearts', value: 7 }];
+        let cardRemoved = hit(testCard);
+        expect(cardRemoved).toEqual({ name: '7 of Hearts', value: 7 });
+    });
 });
