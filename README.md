@@ -5,6 +5,12 @@
 > npm i 
 > npm start
 ```
+install dependencies and start game
+
+```
+> npm test
+```
+run all test suites
 
 ## Next steps
 
