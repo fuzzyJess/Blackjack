@@ -7,7 +7,7 @@ describe("checkScore() function", () => {
             { name: '8 of Diamonds', value: 8 }
         ];
         expect(checkScore(hand)).toEqual({score: 14, validHand: true});
-    })
+    });
     test("when passed a hand with a score of over 21 returns correct score and validHand: false", () => {
         const hand = [
             { name: '6 of Hearts', value: 6 },
@@ -15,14 +15,14 @@ describe("checkScore() function", () => {
             { name: 'King of Spades', value: 10 }
         ];
         expect(checkScore(hand)).toEqual({score: 24, validHand: false});
-    })
+    });
     test("when passed Blackjack returns correct score and vaildHand: true", () => {
         const hand = [
             { name: 'King of Spades', value: 10 },
             { name: 'Ace of Diamonds', value: 11 }
         ];
         expect(checkScore(hand)).toEqual({score: 21, validHand: true});
-    })
+    });
     test("when passed a hand with a score of over 21 but containing aces returns score with aces value reduced to 1", () => {
         const hand1 = [
             { name: 'King of Clubs', value: 10 },
@@ -36,5 +36,5 @@ describe("checkScore() function", () => {
             { name: 'Ace of Spades', value: 11 }
         ];
         expect(checkScore(hand2)).toEqual({score: 21, validHand: true});
-    })
-})
+    });
+});

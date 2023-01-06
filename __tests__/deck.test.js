@@ -56,6 +56,6 @@ describe("createDeck() function", () => {
         { name: 'Jack of Clubs', value: 10 },
         { name: 'Queen of Clubs', value: 10 },
         { name: 'King of Clubs', value: 10 }
-      ])
-    })
-})
+      ]);
+    });
+});

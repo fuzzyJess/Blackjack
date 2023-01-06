@@ -1,6 +1,6 @@
 const { createDeck } = require('../deck');
 const { shuffleDeck } = require('../deal');
-const { playGame, dealCards, hitExtraCards, evaluateGame } = require('../game');
+const { dealCards, hitExtraCards, evaluateGame } = require('../game');
 const { createPlayer } = require('../player');
 
 describe("dealCards() function", () => {
@@ -10,8 +10,8 @@ describe("dealCards() function", () => {
         dealCards(player, newDeck);
         expect(player.hand.length).toBe(2);
         expect(typeof player.hand[0]).toBe("object");
-    })
-})
+    });
+});
 
 describe("hitExtraCards", () => {
     test("only deals extra cards to players who's score is below 17", () => {
@@ -36,8 +36,8 @@ describe("hitExtraCards", () => {
         expect(player.hand.length > 2).toBe(true);
         hitExtraCards(dealer, newDeck);
         expect(dealer.hand.length).toBe(2);
-    })
-})
+    });
+});
 
 describe("evaluateGame", () => {
     test("Console.log should have been called with correct end game message", () => {
@@ -63,7 +63,6 @@ describe("evaluateGame", () => {
         evaluateGame(dealer, player);
         expect(logSpy).toHaveBeenCalledTimes(1);
         expect(logSpy).toHaveBeenCalledWith('Jessica has won!');
-
         logSpy.mockRestore();
-    })
-})
+    });
+});
