@@ -20,6 +20,8 @@ function addPlayers(player) {
     return gamePlayers;
 }
 
+// create player & dealer within playGame function... don't have a player array
+
 function dealCards(gamePlayers, deck) {
     gamePlayers.forEach(player => {
         player.hand = deal(deck);
@@ -31,10 +33,7 @@ function dealCards(gamePlayers, deck) {
 function hitExtraCards(gamePlayers, deck) {
     gamePlayers.forEach(player => {    
         dealerPlay(player, deck);
-        
-        if (player.currentScore.score >= 17 && player.currentScore.score < 22){
-            console.log(`${player.playerName} stands with a final score of ${stand(player).score}`);
-        }; 
+       
     });
 }
 
