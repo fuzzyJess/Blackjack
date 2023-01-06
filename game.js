@@ -1,6 +1,6 @@
 // import inquirer from 'inquirer';
 const { createDeck } = require('./deck');
-const { createPlayer, stand, dealerPlay } = require('./player');
+const { createPlayer, dealerHit, playerHit } = require('./player');
 const { deal, shuffleDeck } = require('./deal');
 
 const { checkScore } = require('./score');
@@ -10,9 +10,9 @@ function playGame(newPlayer) {
     const dealer = createPlayer("Dealer Dan");
     const player = createPlayer(newPlayer);
     dealCards(player, deck);
-    hitExtraCards(player, deck);
     dealCards(dealer, deck);
-    hitExtraCards(dealer, deck);
+    playerHit(player, deck);
+    dealerHit(dealer, deck);
     evaluateGame(dealer, player);
 }
 
@@ -20,10 +20,6 @@ function dealCards(player, deck) {
     player.hand = deal(deck);
     player.currentScore = checkScore(player.hand);
     console.log(`${player.playerName} was dealt the ${player.hand[0].name} and the ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
-}
-
-function hitExtraCards(player, deck) {
-    dealerPlay(player, deck);
 }
 
 function evaluateGame(dealer, player) {
@@ -45,4 +41,4 @@ function evaluateGame(dealer, player) {
     }
 }
 
-exporting: module.exports = { playGame, dealCards, hitExtraCards, evaluateGame }
+exporting: module.exports = { playGame, dealCards, evaluateGame }

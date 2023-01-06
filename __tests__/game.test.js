@@ -1,6 +1,6 @@
 const { createDeck } = require('../deck');
 const { shuffleDeck } = require('../deal');
-const { dealCards, hitExtraCards, evaluateGame } = require('../game');
+const { dealCards, evaluateGame } = require('../game');
 const { createPlayer } = require('../player');
 
 describe("dealCards() function", () => {
@@ -10,32 +10,6 @@ describe("dealCards() function", () => {
         dealCards(player, newDeck);
         expect(player.hand.length).toBe(2);
         expect(typeof player.hand[0]).toBe("object");
-    });
-});
-
-describe("hitExtraCards", () => {
-    test("only deals extra cards to players who's score is below 17", () => {
-        newDeck = shuffleDeck(createDeck());
-        let player = {
-            playerName: 'Jessica',
-            hand: [
-              { name: '7 of Hearts', value: 7 },
-              { name: '4 of Diamonds', value: 4 }
-            ],
-            currentScore: { score: 11, validHand: true }
-          };
-          let dealer = {
-            playerName: 'Dealer Dan',
-            hand: [
-              { name: 'Queen of Spades', value: 10 },
-              { name: 'King of Spades', value: 10 }
-            ],
-            currentScore: { score: 20, validHand: true }
-          };
-        hitExtraCards(player, newDeck);
-        expect(player.hand.length > 2).toBe(true);
-        hitExtraCards(dealer, newDeck);
-        expect(dealer.hand.length).toBe(2);
     });
 });
 
