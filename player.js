@@ -1,6 +1,5 @@
 const { checkScore } = require('./score');
 const { hit } = require('./deal');
-const { aOrAn } = require('./game');
 
 function createPlayer(playerName) {
     const player = {};
@@ -14,12 +13,11 @@ function stand(player) {
 };
 
 function dealerPlay(player, deck) {
-    console.log(player)
     while (player.currentScore.validHand === true && player.currentScore.score < 17) {
         let card = hit(deck);
         player.hand.push(card);
         player.currentScore = checkScore(player.hand);
-        console.log(`${player.playerName} recieves a ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
+        console.log(`${player.playerName} recieves the ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
         if (player.currentScore.score > 21) {
             console.log(`${player.playerName} is bust.`);
         }
