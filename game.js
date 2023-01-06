@@ -1,51 +1,41 @@
 // import inquirer from 'inquirer';
+const { createDeck } = require('./deck');
 const { createPlayer, stand, dealerPlay } = require('./player');
-const { deal } = require('./deal');
+const { deal, shuffleDeck } = require('./deal');
 
 const { checkScore } = require('./score');
 
-function playGame(player, deck) {
-    const gamePlayers = addPlayers(player);
-    dealCards(gamePlayers, deck);
-    hitExtraCards(gamePlayers, deck);
-    evaluateGame(gamePlayers);
-    
-    return gamePlayers;
+function playGame(newPlayer) {
+    deck = shuffleDeck(createDeck());
+    const dealer = createPlayer("Dealer Dan");
+    const player = createPlayer(newPlayer);
+    dealCards(player, deck);
+    hitExtraCards(player, deck);
+    dealCards(dealer, deck);
+    hitExtraCards(dealer, deck);
+    evaluateGame(dealer, player);
 }
 
-function addPlayers(player) {
-    const gamePlayers = [];
-    gamePlayers.push(createPlayer(player));
-    gamePlayers.push(createPlayer("Dealer Dan"));
-    return gamePlayers;
+function dealCards(player, deck) {
+    player.hand = deal(deck);
+    player.currentScore = checkScore(player.hand);
+    console.log(`${player.playerName} was dealt the ${player.hand[0].name} and the ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
 }
 
-// create player & dealer within playGame function... don't have a player array
-
-function dealCards(gamePlayers, deck) {
-    gamePlayers.forEach(player => {
-        player.hand = deal(deck);
-        player.currentScore = checkScore(player.hand);
-        console.log(`${player.playerName} was dealt ${aOrAn(player.hand[0])} ${player.hand[0].name} and ${aOrAn(player.hand[1])} ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
-    })
+function hitExtraCards(player, deck) {
+    dealerPlay(player, deck);
 }
 
-function hitExtraCards(gamePlayers, deck) {
-    gamePlayers.forEach(player => {    
-        dealerPlay(player, deck);
-    });
-}
-
-function evaluateGame(players) {
+function evaluateGame(dealer, player) {
     let winner = "";
-    if (players[0].currentScore.validHand === true) {
-        if (players[0].currentScore.score > players[1].currentScore.score || players[1].currentScore.validHand === false) {
-            winner = players[0].playerName;
+    if (player.currentScore.validHand === true) {
+        if (player.currentScore.score > dealer.currentScore.score || dealer.currentScore.validHand === false) {
+            winner = player.playerName;
         } 
     } 
-    if (players[1].currentScore.validHand === true) {
-        if (players[1].currentScore.score > players[0].currentScore.score || players[0].currentScore.validHand === false) {
-            winner = players[1].playerName;
+    if (dealer.currentScore.validHand === true) {
+        if (dealer.currentScore.score > player.currentScore.score || player.currentScore.validHand === false) {
+            winner = dealer.playerName;
         } 
     }
     if (winner.length > 0) {
@@ -55,13 +45,4 @@ function evaluateGame(players) {
     }
 }
 
-function aOrAn(card) {
-    if (card.value === 11) {
-        return "an";
-    } else {
-        return "a";
-    };
-};
-// inserts 'a' or 'an' into sentence as needed
-
-exporting: module.exports = { playGame, addPlayers, dealCards, hitExtraCards, evaluateGame, aOrAn }
+exporting: module.exports = { playGame, dealCards, hitExtraCards, evaluateGame }
