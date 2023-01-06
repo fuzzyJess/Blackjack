@@ -12,7 +12,7 @@ function stand(player) {
     return finalScore;
 };
 
-function dealerPlay(player, deck) {
+function dealerHit(player, deck) {
     while (player.currentScore.validHand === true && player.currentScore.score < 17) {
         let card = hit(deck);
         player.hand.push(card);
@@ -27,4 +27,20 @@ function dealerPlay(player, deck) {
     }; 
 }
 
-exporting: module.exports = { createPlayer, stand, dealerPlay };
+function playerHit(player, deck) {
+    let chooseHit = Math.round(Math.random());
+    while (chooseHit === 0 && player.currentScore.score < 21) {
+        let card = hit(deck);
+        player.hand.push(card);
+        player.currentScore = checkScore(player.hand);
+        console.log(`${player.playerName} recieves the ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
+        chooseHit = Math.round(Math.random());
+    }
+    if (player.currentScore.score > 21) {
+            console.log(`${player.playerName} is bust.`);
+        } else {
+            console.log(`${player.playerName} stands with a final score of ${stand(player).score}`);
+        }
+}
+
+exporting: module.exports = { createPlayer, stand, dealerHit, playerHit };
