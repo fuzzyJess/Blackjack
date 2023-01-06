@@ -24,15 +24,13 @@ function dealCards(gamePlayers, deck) {
     gamePlayers.forEach(player => {
         player.hand = deal(deck);
         player.currentScore = checkScore(player.hand);
-        console.log(`${player.playerName} was dealt a ${player.hand[0].name} and a ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
+        console.log(`${player.playerName} was dealt ${aOrAn(player.hand[0])} ${player.hand[0].name} and ${aOrAn(player.hand[1])} ${player.hand[1].name}. ${player.playerName}'s current score is ${player.currentScore.score}.`)
     })
 }
 
 function hitExtraCards(gamePlayers, deck) {
     gamePlayers.forEach(player => {    
-        while (player.currentScore.score < 17) {
-            dealerPlay(player, deck);
-        }; 
+        dealerPlay(player, deck);
         
         if (player.currentScore.score >= 17 && player.currentScore.score < 22){
             console.log(`${player.playerName} stands with a final score of ${stand(player).score}`);
@@ -57,7 +55,15 @@ function evaluateGame(players) {
     } else {
         console.log("It was a tie!")
     }
-    
 }
 
-exporting: module.exports = { playGame, addPlayers, dealCards, hitExtraCards, evaluateGame }
+function aOrAn(card) {
+    if (card.value === 11) {
+        return "an";
+    } else {
+        return "a";
+    };
+};
+// inserts 'a' or 'an' into sentence as needed
+
+exporting: module.exports = { playGame, addPlayers, dealCards, hitExtraCards, evaluateGame, aOrAn }
