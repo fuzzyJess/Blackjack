@@ -20,7 +20,7 @@ const choice = {
 
 (async function () {
   console.log('Can you beat Dealer Dan without going bust?')
-  deck = shuffleDeck(createDeck())
+  const deck = shuffleDeck(createDeck())
   console.log('Shuffling the deck...')
   const dealer = createPlayer('Dealer Dan')
   const playerName = await inquirer.prompt([enterPlayerName])

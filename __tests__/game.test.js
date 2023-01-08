@@ -5,7 +5,7 @@ const { createPlayer } = require('../player')
 
 describe('dealCards() function', () => {
   test('deals initial hand to players', () => {
-    newDeck = shuffleDeck(createDeck())
+    const newDeck = shuffleDeck(createDeck())
     const player = createPlayer('Jessica')
     dealCards(player, newDeck)
     expect(player.hand.length).toBe(2)

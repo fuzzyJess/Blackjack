@@ -27,4 +27,4 @@ function convertAces (hand, handScore) {
   })
 };
 
-exporting: module.exports = { checkScore }
+module.exports = { checkScore }

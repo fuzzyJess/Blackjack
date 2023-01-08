@@ -12,7 +12,7 @@ function hit (deck) {
 }
 
 function deal (deck) {
-  hand = []
+  const hand = []
   for (let i = 0; i <= 1; i++) {
     const card = hit(deck)
     hand.push(card)
@@ -20,4 +20,4 @@ function deal (deck) {
   return hand
 }
 
-exporting: module.exports = { shuffleDeck, deal, hit }
+module.exports = { shuffleDeck, deal, hit }

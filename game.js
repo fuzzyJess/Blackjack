@@ -5,7 +5,7 @@ const { deal, shuffleDeck } = require('./deal')
 const { checkScore } = require('./score')
 
 function playGame (newPlayer) {
-  deck = shuffleDeck(createDeck())
+  const deck = shuffleDeck(createDeck())
   const dealer = createPlayer('Dealer Dan')
   const player = createPlayer(newPlayer)
   dealCards(player, deck)
@@ -40,4 +40,4 @@ function evaluateGame (dealer, player) {
   };
 };
 
-exporting: module.exports = { playGame, dealCards, evaluateGame }
+module.exports = { playGame, dealCards, evaluateGame }

@@ -43,4 +43,4 @@ function playerHit (player, deck) {
   }
 }
 
-exporting: module.exports = { createPlayer, stand, dealerHit, playerHit }
+module.exports = { createPlayer, stand, dealerHit, playerHit }
