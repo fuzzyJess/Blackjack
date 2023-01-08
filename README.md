@@ -1,16 +1,21 @@
 # Blackjack
 
+## Blackjack game
+
+This is a simple command line game where a single player can have a hand of Blackjack against an automated dealer. The dealer will automatically stand on a hand of 17 or above.
+
 ## How to run
+install dependencies and start game
 ```
 > npm i 
 > npm start
 ```
-install dependencies and start game
 
+run all test suites
 ```
 > npm test
 ```
-run all test suites
+
 
 ## Next steps
 
