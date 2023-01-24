@@ -17,7 +17,7 @@ function dealerHit (player, deck) {
     const card = hit(deck)
     player.hand.push(card)
     player.currentScore = checkScore(player.hand)
-    console.log(`${player.playerName} recieves the ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
+    console.log(`${player.playerName} receives the ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
     if (player.currentScore.score > 21) {
       console.log(`${player.playerName} is bust.`)
     }
@@ -33,7 +33,7 @@ function playerHit (player, deck) {
     const card = hit(deck)
     player.hand.push(card)
     player.currentScore = checkScore(player.hand)
-    console.log(`${player.playerName} recieves the ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
+    console.log(`${player.playerName} receives the ${player.hand[player.hand.length - 1].name} and now has a score of ${player.currentScore.score}.`)
     chooseHit = Math.round(Math.random())
   }
   if (player.currentScore.score > 21) {
